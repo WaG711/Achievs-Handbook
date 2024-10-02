@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import '../../domain/entities/game.dart';
+import 'game_card.dart';
+
+class ListGames extends StatefulWidget {
+  final List<Game> games;
+  const ListGames({super.key, required this.games});
+
+  @override
+  State<ListGames> createState() => _ListGamesState();
+}
+
+class _ListGamesState extends State<ListGames> {
+  @override
+  Widget build(BuildContext context) {
+    return MasonryGridView.count(
+      padding: const EdgeInsets.all(5),
+      crossAxisCount: 2,
+      mainAxisSpacing: 2.0,
+      crossAxisSpacing: 2.0,
+      itemCount: widget.games.length,
+      itemBuilder: (context, index) {
+        final game = widget.games[index];
+        return GestureDetector(
+          onTap: () {},
+          child: GameCard(
+            game: game,
+            onFavoriteToggle: () {
+              setState(() {
+                game.isFavorite = !game.isFavorite;
+              });
+            },
+          ),
+        );
+      },
+    );
+  }
+}

@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/usecases/fetch_games.dart';
-import 'game_event.dart';
-import 'game_state.dart';
+import 'home_event.dart';
+import 'home_state.dart';
 
-class GameBloc extends Bloc<GameEvent, GameState> {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final FetchGames fetchGames;
 
-  GameBloc(this.fetchGames) : super(GameInitial()) {
+  HomeBloc(this.fetchGames) : super(HomeInitial()) {
     on<LoadGames>((event, emit) async {
       await _loadGames(emit);
     });
@@ -17,13 +17,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
   }
 
-  Future<void> _loadGames(Emitter<GameState> emit) async {
-    emit(GameLoading());
+  Future<void> _loadGames(Emitter<HomeState> emit) async {
+    emit(HomeLoading());
     try {
       final games = await fetchGames.execute();
-      emit(GameLoaded(games));
+      emit(HomeLoaded(games));
     } catch (e) {
-      emit(GameError("Не удалось загрузить игры"));
+      emit(HomeError("Не удалось загрузить игры"));
     }
   }
 }

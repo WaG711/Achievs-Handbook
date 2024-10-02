@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guide_achievements/core/widgets/appbar_search.dart';
 
-import 'bloc/game_bloc.dart';
-import 'bloc/game_event.dart';
-import 'bloc/game_state.dart';
+import 'bloc/home_bloc.dart';
+import 'bloc/home_event.dart';
+import 'bloc/home_state.dart';
 import 'widgets/list_games.dart';
 
 class Home extends StatelessWidget {
@@ -15,21 +15,21 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 35, 35, 35),
       appBar: const AppbarSearch(isGameSearch: true),
-      body: BlocBuilder<GameBloc, GameState>(
+      body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          if (state is GameLoading) {
+          if (state is HomeLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is GameLoaded) {
+          } else if (state is HomeLoaded) {
             final games = state.games;
             return RefreshIndicator(
               backgroundColor: const Color.fromARGB(255, 35, 35, 35),
               onRefresh: () async {
-                context.read<GameBloc>().add(RefreshGames());
+                context.read<HomeBloc>().add(RefreshGames());
               },
               color: Colors.green,
               child: ListGames(games: games),
             );
-          } else if (state is GameError) {
+          } else if (state is HomeError) {
             return Center(child: Text(state.message));
           }
           return const Center(child: Text('Нет доступных данных'));

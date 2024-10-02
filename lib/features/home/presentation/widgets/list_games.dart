@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../../details/presentation/details.dart';
 import '../../domain/entities/game.dart';
 import 'game_card.dart';
 
@@ -24,7 +25,13 @@ class _ListGamesState extends State<ListGames> {
       itemBuilder: (context, index) {
         final game = widget.games[index];
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+             Navigator.pushNamed(
+              context,
+              '/details',
+              arguments: game.gameId,
+            );
+          },
           child: GameCard(
             game: game,
             onFavoriteToggle: () {

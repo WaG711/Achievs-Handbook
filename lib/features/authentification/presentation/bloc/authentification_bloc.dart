@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
@@ -14,6 +15,11 @@ class AuthentificationBloc extends Bloc<AuthentificationEvent, AuthentificationS
       emit(Loading());
       try {
         final userId = await loginUseCase.execute(event.username, event.password);
+
+        final prefs = SharedPreferencesAsync();
+        await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('userId', userId);
+
         emit(Authenticated(userId));
       } catch (e) {
         emit(const Error('Ошибка авторизации'));
@@ -24,6 +30,11 @@ class AuthentificationBloc extends Bloc<AuthentificationEvent, AuthentificationS
       emit(Loading());
       try {
         final userId = await registerUseCase.execute(event.username, event.password);
+
+        final prefs = SharedPreferencesAsync();
+        await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('userId', userId);
+        
         emit(Authenticated(userId));
       } catch (e) {
         emit(const Error('Ошибка регистрации'));

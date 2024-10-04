@@ -5,10 +5,9 @@ class AuthentificationCheck extends StatelessWidget {
   const AuthentificationCheck({super.key});
 
   Future<String?> _getUserId() async {
-    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    final prefs = SharedPreferencesAsync();
     if (await prefs.getBool('isLoggedIn') ?? false) {
-      final userId = prefs.getString('userId');
-      return userId;
+      return prefs.getString('userId');
     }
     return null;
   }

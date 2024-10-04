@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/game2.dart';
+import '../../domain/entities/game_details.dart';
 import 'achievement_container.dart';
 
 class GameInfo extends StatefulWidget {
-  final Game2 game;
+  final GameDetails game;
   const GameInfo({super.key, required this.game});
 
   @override

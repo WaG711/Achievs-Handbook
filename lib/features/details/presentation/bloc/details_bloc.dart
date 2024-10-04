@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/usecases/fetch_game.dart';
+import '../../domain/usecases/details_usecase.dart';
 import 'details_event.dart';
 import 'details_state.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
-  final FetchGame fetchGame;
+  final DetailsUseCase fetchGame;
 
   DetailsBloc(this.fetchGame) : super(DetailsInitial()) {
     on<LoadGame>((event, emit) async {

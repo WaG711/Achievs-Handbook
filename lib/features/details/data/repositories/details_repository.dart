@@ -1,18 +1,18 @@
 import 'package:guide_achievements/features/details/data/models/achievement_model_api.dart';
-import 'package:guide_achievements/features/details/data/models/game2_model_api.dart';
+import 'package:guide_achievements/features/details/data/models/game_details_model_api.dart';
 import 'package:guide_achievements/features/details/data/models/guide_model_api.dart';
 
 import '../../domain/entities/achievement.dart';
-import '../../domain/entities/game2.dart';
+import '../../domain/entities/game_details.dart';
 import '../../domain/entities/guide.dart';
-import '../api/game2_api.dart';
+import '../api/details_api.dart';
 
-class Game2Repository {
-  final Game2Api _gameApi;
+class DetailsRepository {
+  final DetailsApi _gameApi;
 
-  Game2Repository(this._gameApi);
+  DetailsRepository(this._gameApi);
 
-  final Game2 _game = Game2(false,
+  final GameDetails _game = GameDetails(false,
       gameId: '1',
       title: 'dghdgdgfdgdg',
       usersFavoritedCount: 34,
@@ -34,14 +34,14 @@ class Game2Repository {
             achievementId: '3', title: 'title', description: 'description'),
       ]);
 
-  Future<Game2> getGame(String gameId) async {
+  Future<GameDetails> getGame(String gameId) async {
     // final gameModel = await _gameApi.fetchGame(gameId);
     // return _mapGameModelApiToGame(gameModel);
     return _game;
   }
 
-  Game2 _mapGameModelApiToGame(Game2ModelApi gameModelApi) {
-    return Game2(
+  GameDetails _mapGameModelApiToGame(GameDetailsModelApi gameModelApi) {
+    return GameDetails(
       gameModelApi.isFavorite,
       gameId: gameModelApi.gameId,
       title: gameModelApi.title,

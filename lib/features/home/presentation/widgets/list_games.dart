@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../../details/presentation/details.dart';
-import '../../domain/entities/game.dart';
+import '../../domain/entities/game_home.dart';
 import 'game_card.dart';
 
 class ListGames extends StatefulWidget {
-  final List<Game> games;
+  final List<GameHome> games;
   const ListGames({super.key, required this.games});
 
   @override

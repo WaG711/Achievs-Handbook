@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/appbar_search.dart';
-import '../domain/entities/game2.dart';
+import '../domain/entities/game_details.dart';
 import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
 import 'bloc/details_state.dart';
@@ -57,7 +57,7 @@ class _DetailsState extends State<Details> {
                 })));
   }
 
-  Widget _buildSelectedContent(Game2 game) {
+  Widget _buildSelectedContent(GameDetails game) {
     switch (_selectedIndex) {
       case 0:
         return GameAchievements(game: game);

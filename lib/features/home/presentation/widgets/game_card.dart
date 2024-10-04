@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/game.dart';
+import '../../domain/entities/game_home.dart';
 
 class GameCard extends StatelessWidget {
-  final Game game;
+  final GameHome game;
   final VoidCallback onFavoriteToggle;
 
   const GameCard({super.key, required this.game, required this.onFavoriteToggle});

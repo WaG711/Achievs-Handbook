@@ -1,7 +1,7 @@
 import 'achievement.dart';
 import 'guide.dart';
 
-class Game2 {
+class GameDetails {
   final String gameId;
   final String title;
   //final String posterUrl;
@@ -10,7 +10,7 @@ class Game2 {
   bool isFavorite;
   final int usersFavoritedCount;
 
-  Game2(this.isFavorite,
+  GameDetails(this.isFavorite,
       {required this.gameId,
       required this.title,
       //required this.posterUrl,

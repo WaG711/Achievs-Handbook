@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/usecases/fetch_games.dart';
+import '../../domain/usecases/home_usecase.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final FetchGames fetchGames;
+  final HomeUseCase fetchGames;
 
   HomeBloc(this.fetchGames) : super(HomeInitial()) {
     on<LoadGames>((event, emit) async {

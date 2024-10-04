@@ -1,7 +1,7 @@
 import 'achievement_model_api.dart';
 import 'guide_model_api.dart';
 
-class Game2ModelApi {
+class GameDetailsModelApi {
   final String gameId;
   final String title;
   final String posterUrl;
@@ -10,7 +10,7 @@ class Game2ModelApi {
   final bool isFavorite;
   final int usersFavoritedCount;
 
-  const Game2ModelApi(
+  const GameDetailsModelApi(
       {required this.gameId,
       required this.title,
       required this.posterUrl,
@@ -19,8 +19,8 @@ class Game2ModelApi {
       required this.guideApi,
       required this.achievementsApi});
 
-  factory Game2ModelApi.fromJson(Map<String, dynamic> json) {
-    return Game2ModelApi(
+  factory GameDetailsModelApi.fromJson(Map<String, dynamic> json) {
+    return GameDetailsModelApi(
         gameId: json['gameId'],
         title: json['title'],
         posterUrl: json['posterUrl'],

@@ -26,3 +26,10 @@ class RegisterRequested extends AuthentificationEvent {
   @override
   List<Object> get props => [username, password];
 }
+
+class LogoutRequested extends AuthentificationEvent {
+  const LogoutRequested();
+
+  @override
+  List<Object> get props => [];
+}

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/authentification/presentation/bloc/authentification_bloc.dart';
+import '../../features/authentification/presentation/bloc/authentification_event.dart';
 
 class BottomSheetMenu extends StatelessWidget {
   const BottomSheetMenu({super.key});
@@ -65,7 +69,10 @@ class BottomSheetMenu extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onTap: () async {
-              Navigator.pop(context);
+              context.read<AuthentificationBloc>().add(
+                    const LogoutRequested(),
+                  );
+              Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],

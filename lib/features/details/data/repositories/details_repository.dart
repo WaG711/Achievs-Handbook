@@ -15,7 +15,6 @@ class DetailsRepository {
   final GameDetails _game = GameDetails(false,
       gameId: '1',
       title: 'dghdgdgfdgdg',
-      usersFavoritedCount: 34,
       guide: const Guide(
           guideId: '1',
           description: 'sdfgsdgsd sdg gs gsd gsd hsd hds hfsdf ',
@@ -50,7 +49,6 @@ class DetailsRepository {
       achievements: gameModelApi.achievementsApi
           .map((a) => _mapAchievementModelApiToAchievement(a))
           .toList(),
-      usersFavoritedCount: gameModelApi.usersFavoritedCount,
     );
   }
 

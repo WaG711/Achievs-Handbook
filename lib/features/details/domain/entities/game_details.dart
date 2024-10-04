@@ -8,13 +8,11 @@ class GameDetails {
   final Guide guide;
   final List<Achievement> achievements;
   bool isFavorite;
-  final int usersFavoritedCount;
 
   GameDetails(this.isFavorite,
       {required this.gameId,
       required this.title,
       //required this.posterUrl,
-      required this.usersFavoritedCount,
       required this.guide,
       required this.achievements});
 }

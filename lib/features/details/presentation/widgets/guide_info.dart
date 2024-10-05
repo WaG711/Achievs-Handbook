@@ -24,9 +24,12 @@ class GuideInfo extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
-                SelectableText(
-                  game.guide.description,
-                  style: const TextStyle(color: Colors.white, fontSize: 22),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: SelectableText(
+                    game.guide.description,
+                    style: const TextStyle(color: Colors.white, fontSize: 22),
+                  ),
                 ),
               ],
             ),

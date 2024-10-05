@@ -14,7 +14,11 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 35, 35, 35),
-      appBar: const AppbarSearch(isGameSearch: true),
+      appBar: AppbarSearch(
+        onSearchChanged: (query) {
+          context.read<HomeBloc>().add(SearchGames(query));
+        },
+      ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {

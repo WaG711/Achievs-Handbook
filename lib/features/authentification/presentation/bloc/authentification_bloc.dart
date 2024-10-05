@@ -44,7 +44,7 @@ class AuthentificationBloc extends Bloc<AuthentificationEvent, AuthentificationS
     on<LogoutRequested>((event, emit) async {
       await prefs.remove('isLoggedIn');
       await prefs.remove('userId');
-      
+
       emit(Initial());
     });
   }

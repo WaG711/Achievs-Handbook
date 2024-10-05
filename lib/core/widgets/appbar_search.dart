@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'bottom_sheet_menu.dart';
 
 class AppbarSearch extends StatefulWidget implements PreferredSizeWidget {
-  final bool isGameSearch;
-  const AppbarSearch({super.key, required this.isGameSearch});
+  final ValueChanged<String> onSearchChanged;
+  const AppbarSearch({super.key, required this.onSearchChanged});
 
   @override
   State<AppbarSearch> createState() => _AppbarSearchState();
@@ -33,8 +33,7 @@ class _AppbarSearchState extends State<AppbarSearch> {
               ),
               onChanged: (query) {
                 setState(() {
-                  if (widget.isGameSearch) {
-                  } else {}
+                  widget.onSearchChanged(query);
                 });
               },
             )
@@ -46,6 +45,7 @@ class _AppbarSearchState extends State<AppbarSearch> {
                 onPressed: () {
                   setState(() {
                     _isSearching = false;
+                    widget.onSearchChanged('');
                   });
                 },
               )

@@ -5,3 +5,10 @@ class LoadGame extends DetailsEvent {
 
   LoadGame(this.gameId);
 }
+
+class SearchAchievements extends DetailsEvent {
+  final String gameId;
+  final String query;
+
+  SearchAchievements(this.query, this.gameId);
+}

@@ -11,6 +11,25 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<LoadGame>((event, emit) async {
       await _loadGame(event.gameId, emit);
     });
+
+    on<SearchAchievements>((event, emit) async {
+      if (state is DetailsLoaded) {
+        try {
+          final game = await fetchGame.execute(event.gameId);
+
+          final filteredAchievements = game.achievements
+              .where((achievement) => achievement.title
+                  .toLowerCase()
+                  .contains(event.query.toLowerCase()))
+              .toList();
+              
+          final filteredGame = game.copyWith(achievements: filteredAchievements);
+          emit(DetailsLoaded(filteredGame));
+        } catch (e) {
+          emit(DetailsError("Не удалось загрузить данные об игре"));
+        }
+      }
+    });
   }
 
   Future<void> _loadGame(String gameId, Emitter<DetailsState> emit) async {
@@ -19,7 +38,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       final game = await fetchGame.execute(gameId);
       emit(DetailsLoaded(game));
     } catch (e) {
-      emit(DetailsError("Не удалось загрузить игры"));
+      emit(DetailsError("Не удалось загрузить данные об игре"));
     }
   }
 }

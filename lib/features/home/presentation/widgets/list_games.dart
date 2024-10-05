@@ -25,7 +25,7 @@ class _ListGamesState extends State<ListGames> {
         final game = widget.games[index];
         return GestureDetector(
           onTap: () {
-             Navigator.pushNamed(
+            Navigator.pushNamed(
               context,
               '/details',
               arguments: game.gameId,

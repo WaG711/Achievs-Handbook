@@ -19,13 +19,15 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   int _selectedIndex = 0;
+  late String _gameId;
 
- @override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final gameId = ModalRoute.of(context)!.settings.arguments as String;
-    BlocProvider.of<DetailsBloc>(context).add(LoadGame(gameId));
+    _gameId = ModalRoute.of(context)!.settings.arguments as String;
+    BlocProvider.of<DetailsBloc>(context).add(LoadGame(_gameId));
   }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -34,7 +36,11 @@ class _DetailsState extends State<Details> {
         },
         child: Scaffold(
             backgroundColor: const Color.fromARGB(255, 35, 35, 35),
-            appBar: const AppbarSearch(isGameSearch: false),
+            appBar: AppbarSearch(
+              onSearchChanged: (query) {
+                context.read<DetailsBloc>().add(SearchAchievements(query, _gameId));
+              },
+            ),
             body: BlocBuilder<DetailsBloc, DetailsState>(
               builder: (context, state) {
                 if (state is DetailsLoading) {

@@ -15,6 +15,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RefreshGames>((event, emit) async {
       await _loadGames(emit);
     });
+
+    on<SearchGames>((event, emit) async {
+      if (state is HomeLoaded) {
+        try {
+          final games = await fetchGames.execute();
+          
+          final filteredGames = games
+              .where((game) =>
+                  game.title.toLowerCase().contains(event.query.toLowerCase()))
+              .toList();
+          emit(HomeLoaded(filteredGames));
+        } catch (e) {
+          emit(HomeError("Не удалось загрузить игры"));
+        }
+      }
+    });
   }
 
   Future<void> _loadGames(Emitter<HomeState> emit) async {

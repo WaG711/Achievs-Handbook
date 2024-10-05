@@ -63,7 +63,8 @@ class _RegisterState extends State<Register> {
               BlocConsumer<AuthentificationBloc, AuthentificationState>(
                 listener: (context, state) {
                   if (state is Authenticated) {
-                    Navigator.pushReplacementNamed(context, '/home', arguments: state.userId);
+                    Navigator.pushReplacementNamed(context, '/home',
+                        arguments: state.userId);
                   } else if (state is Error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),

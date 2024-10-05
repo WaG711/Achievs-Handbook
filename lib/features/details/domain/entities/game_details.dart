@@ -15,4 +15,14 @@ class GameDetails {
       //required this.posterUrl,
       required this.guide,
       required this.achievements});
+
+  GameDetails copyWith({
+    List<Achievement>? achievements,
+  }) {
+    return GameDetails(isFavorite,
+        gameId: gameId,
+        title: title,
+        guide: guide,
+        achievements: achievements ?? this.achievements);
+  }
 }

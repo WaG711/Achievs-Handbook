@@ -7,7 +7,7 @@ class HomeRepository {
   HomeRepository(this._gameApi);
 
   final List<GameHome> _allGames = [
-    GameHome(false, gameId: '1', title: 'Game 1Game 1Game 1 Game 1Game 1 Game 1Game 1 Game 1 Game 1Game 1Game 1Game 1 Game 1v Game 1',  totalAchievements: 24),
+    GameHome(false, gameId: '1', title: 'Game 1Game 1Game 1 Game 1Game 1 Game 1Game 1 Game 1 Game 1Game 1Game 1Game 1 Game 1v Game 1', totalAchievements: 24),
     GameHome(false, gameId: '2', title: 'Game 2', totalAchievements: 54),
     GameHome(false, gameId: '3', title: 'Game 3', totalAchievements: 43),
     GameHome(false, gameId: '4', title: 'Game 4', totalAchievements: 123),

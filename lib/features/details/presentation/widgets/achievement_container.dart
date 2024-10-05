@@ -46,7 +46,8 @@ class AchievementContainer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: SelectableText(achievement.description,
-                        style: const TextStyle(color: Colors.white, fontSize: 13)),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13)),
                   ),
                 ],
               ),

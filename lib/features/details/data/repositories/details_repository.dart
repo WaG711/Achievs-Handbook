@@ -20,17 +20,17 @@ class DetailsRepository {
           description: 'sdfgsdgsd sdg gs gsd gsd hsd hds hfsdf ',
           achievements: [
             Achievement(
-                achievementId: '1', title: 'title', description: 'description'),
+                achievementId: '1', title: 'title1', description: 'description'),
             Achievement(
-                achievementId: '2', title: 'title', description: 'description'),
+                achievementId: '2', title: 'title2', description: 'description'),
           ]),
       achievements: [
         const Achievement(
-            achievementId: '1', title: 'title', description: 'description'),
+            achievementId: '1', title: 'title1', description: 'description'),
         const Achievement(
-            achievementId: '2', title: 'title', description: 'description'),
+            achievementId: '2', title: 'title2', description: 'description'),
         const Achievement(
-            achievementId: '3', title: 'title', description: 'description'),
+            achievementId: '3', title: 'title3', description: 'description'),
       ]);
 
   Future<GameDetails> getGame(String gameId) async {

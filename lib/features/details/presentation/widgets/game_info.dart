@@ -35,7 +35,8 @@ class _GameInfoState extends State<GameInfo> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 0),
+                  padding: const EdgeInsets.only(
+                      left: 5, right: 5, top: 5, bottom: 0),
                   child: Text(
                     widget.game.title,
                     style: const TextStyle(
@@ -52,8 +53,7 @@ class _GameInfoState extends State<GameInfo> {
                         child: Text(
                           'Достижения: ${widget.game.achievements.length}',
                           style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22),
+                              color: Colors.white, fontSize: 22),
                         ),
                       ),
                     ),

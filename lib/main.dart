@@ -59,22 +59,21 @@ class MainApp extends StatelessWidget {
             return homeBloc;
           },
         ),
+        BlocProvider<DetailsBloc>(create: (context) {
+          final detailsApi = DetailsApi(dio);
+          final repository = DetailsRepository(detailsApi);
+          final detailsUseCase = DetailsUseCase(repository);
+          return DetailsBloc(detailsUseCase);
+        })
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => const AuthentificationCheck(),
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/home': (context) => const Home(),
-          '/details': (context) => BlocProvider(
-                create: (context) {
-                  final detailsApi = DetailsApi(dio);
-                  final repository = DetailsRepository(detailsApi);
-                  final detailsUseCase = DetailsUseCase(repository);
-                  return DetailsBloc(detailsUseCase);
-                },
-                child: const Details(),
-              ),
+          '/details': (context) => const Details(),
         },
       ),
     );

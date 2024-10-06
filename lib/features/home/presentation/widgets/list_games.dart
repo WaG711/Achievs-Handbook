@@ -5,8 +5,9 @@ import '../../domain/entities/game_home.dart';
 import 'game_card.dart';
 
 class ListGames extends StatefulWidget {
+  final String userId;
   final List<GameHome> games;
-  const ListGames({super.key, required this.games});
+  const ListGames({super.key, required this.userId, required this.games});
 
   @override
   State<ListGames> createState() => _ListGamesState();
@@ -25,11 +26,8 @@ class _ListGamesState extends State<ListGames> {
         final game = widget.games[index];
         return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/details',
-              arguments: game.gameId,
-            );
+            Navigator.pushNamed(context, '/details',
+                arguments: <String>[widget.userId, game.gameId]);
           },
           child: GameCard(
             game: game,

@@ -33,7 +33,7 @@ class DetailsRepository {
             achievementId: '3', title: 'title3', description: 'description'),
       ]);
 
-  Future<GameDetails> getGame(String gameId) async {
+  Future<GameDetails> getGame(String userId, String gameId) async {
     // final gameModel = await _gameApi.fetchGame(gameId);
     // return _mapGameModelApiToGame(gameModel);
     return _game;

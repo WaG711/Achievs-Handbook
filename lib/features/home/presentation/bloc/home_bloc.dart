@@ -9,17 +9,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc(this.fetchGames) : super(HomeInitial()) {
     on<LoadGames>((event, emit) async {
-      await _loadGames(emit);
+      await _loadGames(event.userId, emit);
     });
 
     on<RefreshGames>((event, emit) async {
-      await _loadGames(emit);
+      await _loadGames(event.userId, emit);
     });
 
     on<SearchGames>((event, emit) async {
       if (state is HomeLoaded) {
         try {
-          final games = await fetchGames.execute();
+          final games = await fetchGames.execute(event.userId);
           
           final filteredGames = games
               .where((game) =>
@@ -33,10 +33,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  Future<void> _loadGames(Emitter<HomeState> emit) async {
+  Future<void> _loadGames(String userId, Emitter<HomeState> emit) async {
     emit(HomeLoading());
     try {
-      final games = await fetchGames.execute();
+      final games = await fetchGames.execute(userId);
       emit(HomeLoaded(games));
     } catch (e) {
       emit(HomeError("Не удалось загрузить игры"));

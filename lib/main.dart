@@ -21,7 +21,6 @@ import 'features/home/data/api/home_api.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
-import 'features/home/presentation/bloc/home_event.dart';
 import 'features/home/presentation/home.dart';
 
 void main() {
@@ -54,9 +53,7 @@ class MainApp extends StatelessWidget {
             final homeApi = HomeApi(dio);
             final repository = HomeRepository(homeApi);
             final homeUseCase = HomeUseCase(repository);
-            final homeBloc = HomeBloc(homeUseCase);
-            homeBloc.add(LoadGames());
-            return homeBloc;
+            return HomeBloc(homeUseCase);
           },
         ),
         BlocProvider<DetailsBloc>(create: (context) {

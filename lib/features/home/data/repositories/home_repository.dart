@@ -18,7 +18,7 @@ class HomeRepository {
     GameHome(false, gameId: '9', title: 'Game 9', totalAchievements: 34),
   ];
 
-  Future<List<GameHome>> getGames() async {
+  Future<List<GameHome>> getGames(String userId) async {
     // final gameModels = await _gameApi.fetchGames();
     // return gameModels
     //     .map((model) => Game(model.isFavorite,

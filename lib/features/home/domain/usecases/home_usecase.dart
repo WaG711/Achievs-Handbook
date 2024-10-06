@@ -6,7 +6,7 @@ class HomeUseCase {
 
   HomeUseCase(this.repository);
 
-  Future<List<GameHome>> execute() async {
-    return await repository.getGames();
+  Future<List<GameHome>> execute(String userId) async {
+    return await repository.getGames(userId);
   }
 }

@@ -6,7 +6,7 @@ class DetailsUseCase {
 
   DetailsUseCase(this.repository);
 
-  Future<GameDetails> execute(String gameId) async {
-    return await repository.getGame(gameId);
+  Future<GameDetails> execute(String userId, String gameId) async {
+    return await repository.getGame(userId, gameId);
   }
 }

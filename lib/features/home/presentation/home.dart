@@ -12,11 +12,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = ModalRoute.of(context)!.settings.arguments as String;
+    context.read<HomeBloc>().add(LoadGames(userId));
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 35, 35, 35),
       appBar: AppbarSearch(
         onSearchChanged: (query) {
-          context.read<HomeBloc>().add(SearchGames(query));
+          context.read<HomeBloc>().add(SearchGames(userId, query));
         },
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
@@ -28,10 +31,10 @@ class Home extends StatelessWidget {
             return RefreshIndicator(
               backgroundColor: const Color.fromARGB(255, 35, 35, 35),
               onRefresh: () async {
-                context.read<HomeBloc>().add(RefreshGames());
+                context.read<HomeBloc>().add(RefreshGames(userId));
               },
               color: Colors.green,
-              child: ListGames(games: games),
+              child: ListGames(userId: userId, games: games),
             );
           } else if (state is HomeError) {
             return Center(child: Text(state.message));

@@ -4,8 +4,9 @@ import '../../domain/entities/game_details.dart';
 import 'achievement_container.dart';
 
 class GameInfo extends StatefulWidget {
+  final String userId;
   final GameDetails game;
-  const GameInfo({super.key, required this.game});
+  const GameInfo({super.key, required this.userId, required this.game});
 
   @override
   State<GameInfo> createState() => _GameInfoState();

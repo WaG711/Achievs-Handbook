@@ -19,18 +19,14 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   int _selectedIndex = 0;
-  late List<String> _arguments;
-  late String _userId;
   late String _gameId;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _arguments = ModalRoute.of(context)!.settings.arguments as List<String>;
-    _userId = _arguments[0];
-    _gameId = _arguments[1];
+    _gameId = ModalRoute.of(context)!.settings.arguments as String;
 
-    BlocProvider.of<DetailsBloc>(context).add(LoadGame(_userId, _gameId));
+    BlocProvider.of<DetailsBloc>(context).add(LoadGame(_gameId));
   }
 
   @override
@@ -43,7 +39,7 @@ class _DetailsState extends State<Details> {
             backgroundColor: const Color.fromARGB(255, 35, 35, 35),
             appBar: AppbarSearch(
               onSearchChanged: (query) {
-                context.read<DetailsBloc>().add(SearchAchievements(_userId, _gameId, query));
+                context.read<DetailsBloc>().add(SearchAchievements(_gameId, query));
               },
             ),
             body: BlocBuilder<DetailsBloc, DetailsState>(
@@ -52,7 +48,7 @@ class _DetailsState extends State<Details> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is DetailsLoaded) {
                   final game = state.game;
-                  return _buildSelectedContent(_userId, game);
+                  return _buildSelectedContent(game);
                 } else if (state is DetailsError) {
                   return Center(child: Text(state.message));
                 }
@@ -68,10 +64,10 @@ class _DetailsState extends State<Details> {
                 })));
   }
 
-  Widget _buildSelectedContent(String userId, GameDetails game) {
+  Widget _buildSelectedContent(GameDetails game) {
     switch (_selectedIndex) {
       case 0:
-        return GameAchievements(userId: userId, game: game);
+        return GameAchievements(game: game);
       case 1:
         return GameGuide(game: game);
       default:

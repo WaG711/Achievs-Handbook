@@ -5,14 +5,15 @@ import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final HomeUseCase fetchGames;
+  final HomeUseCase homeUseCase;
+  final String userId;
   String? _currentQuery;
 
-  HomeBloc(this.fetchGames) : super(HomeInitial()) {
+  HomeBloc(this.homeUseCase, this.userId) : super(HomeInitial()) {
     on<LoadGames>((event, emit) async {
       emit(HomeLoading());
       try {
-        final games = await fetchGames.execute(event.userId);
+        final games = await homeUseCase.execute(userId);
         emit(HomeLoaded(games));
       } catch (e) {
         emit(HomeError("Не удалось загрузить игры"));
@@ -20,19 +21,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
 
     on<RefreshGames>((event, emit) async {
-      await _loadGames(event.userId, emit);
+      await _loadGames(emit);
     });
 
     on<SearchGames>((event, emit) async {
       _currentQuery = event.query;
-      await _loadGames(event.userId, emit);
+      await _loadGames(emit);
+    });
+
+    on<LoadFavoriteGames>((event, emit) async {
+      emit(HomeLoading());
+      try {
+        final games = await homeUseCase.executeFavorite(userId);
+        emit(HomeLoaded(games));
+      } catch (e) {
+        emit(HomeError("Не удалось загрузить игры"));
+      }
     });
   }
 
-  Future<void> _loadGames(String userId, Emitter<HomeState> emit) async {
+  Future<void> _loadGames(Emitter<HomeState> emit) async {
     emit(HomeLoading());
     try {
-      final games = await fetchGames.execute(userId);
+      final games = await homeUseCase.execute(userId);
 
       final filteredGames = _currentQuery != null && _currentQuery!.isNotEmpty
           ? games

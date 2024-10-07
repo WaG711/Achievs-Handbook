@@ -42,6 +42,7 @@ class BottomSheetMenu extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
+              Navigator.pushNamed(context, '/favoriteGames');
             },
           ),
           ListTile(

@@ -10,8 +10,24 @@ class AuthentificationBloc extends Bloc<AuthentificationEvent, AuthentificationS
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
 
-  AuthentificationBloc(this.loginUseCase, this.registerUseCase): super(Initial()) {
+  AuthentificationBloc(this.loginUseCase, this.registerUseCase) : super(Initial()) {
     final prefs = SharedPreferencesAsync();
+
+    on<AuthentificationCheckEvent>((event, emit) async {
+      emit(Loading());
+      try {
+        bool isLoggedIn = await prefs.getBool('isLoggedIn') ?? false;
+
+        if (isLoggedIn) {
+          final userId = await prefs.getString('userId');
+          emit(Authenticated(userId!));
+        } else {
+          emit(Initial());
+        }
+      } catch (e) {
+        emit(const Error('Ошибка при проверке аутентификации'));
+      }
+    });
 
     on<LoginRequested>((event, emit) async {
       emit(Loading());
@@ -47,5 +63,9 @@ class AuthentificationBloc extends Bloc<AuthentificationEvent, AuthentificationS
 
       emit(Initial());
     });
+  }
+
+  String get userId {
+    return (state as Authenticated).userId;
   }
 }

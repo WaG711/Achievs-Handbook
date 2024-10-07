@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/authentification_bloc.dart';
+import 'bloc/authentification_event.dart';
+import 'bloc/authentification_state.dart';
 
 class AuthentificationCheck extends StatelessWidget {
   const AuthentificationCheck({super.key});
 
-  Future<String?> _getUserId() async {
-    final prefs = SharedPreferencesAsync();
-    if (await prefs.getBool('isLoggedIn') ?? false) {
-      return prefs.getString('userId');
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String?>(
-      future: _getUserId(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasData) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.of(context).pushReplacementNamed('/home', arguments: snapshot.data);
-          });
-        } else if (!snapshot.hasData) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.of(context).pushReplacementNamed('/login');
-          });
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Ошибка: ${snapshot.error}'));
+    context.read<AuthentificationBloc>().add(const AuthentificationCheckEvent());
+
+    return BlocListener<AuthentificationBloc, AuthentificationState>(
+      listener: (context, state) {
+        if (state is Authenticated) {
+          Navigator.of(context).pushReplacementNamed('/home');
+        } else if (state is Initial) {
+          Navigator.of(context).pushReplacementNamed('/login');
         }
-        return Container();
       },
+      child: BlocBuilder<AuthentificationBloc, AuthentificationState>(
+        builder: (context, state) {
+          if (state is Error) {
+            return Center(child: Text('Ошибка: ${state.message}'));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }

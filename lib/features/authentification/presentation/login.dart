@@ -59,8 +59,7 @@ class _LoginState extends State<Login> {
               BlocConsumer<AuthentificationBloc, AuthentificationState>(
                 listener: (context, state) {
                   if (state is Authenticated) {
-                    Navigator.pushReplacementNamed(context, '/home',
-                        arguments: state.userId);
+                    Navigator.pushReplacementNamed(context, '/home');
                   } else if (state is Error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),

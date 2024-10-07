@@ -1,20 +1,13 @@
 abstract class HomeEvent {}
 
-class LoadGames extends HomeEvent {
-  String userId;
+class LoadGames extends HomeEvent {}
 
-  LoadGames(this.userId);
-}
+class RefreshGames extends HomeEvent {}
 
-class RefreshGames extends HomeEvent {
-  String userId;
-
-  RefreshGames(this.userId);
-}
+class LoadFavoriteGames extends HomeEvent {}
 
 class SearchGames extends HomeEvent {
-  final String userId;
   final String query;
 
-  SearchGames(this.userId, this.query);
+  SearchGames(this.query);
 }

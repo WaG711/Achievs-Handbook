@@ -21,6 +21,7 @@ import 'features/home/data/api/home_api.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/home/presentation/favorite_games.dart';
 import 'features/home/presentation/home.dart';
 
 void main() {
@@ -53,14 +54,16 @@ class MainApp extends StatelessWidget {
             final homeApi = HomeApi(dio);
             final repository = HomeRepository(homeApi);
             final homeUseCase = HomeUseCase(repository);
-            return HomeBloc(homeUseCase);
+            final userId = context.read<AuthentificationBloc>().userId;
+            return HomeBloc(homeUseCase, userId);
           },
         ),
         BlocProvider<DetailsBloc>(create: (context) {
           final detailsApi = DetailsApi(dio);
           final repository = DetailsRepository(detailsApi);
           final detailsUseCase = DetailsUseCase(repository);
-          return DetailsBloc(detailsUseCase);
+          final userId = context.read<AuthentificationBloc>().userId;
+          return DetailsBloc(detailsUseCase, userId);
         })
       ],
       child: MaterialApp(
@@ -70,7 +73,8 @@ class MainApp extends StatelessWidget {
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/home': (context) => const Home(),
-          '/details': (context) => const Details(),
+          '/favoriteGames': (context) => const FavoriteGames(),
+          '/details': (context) => const Details()
         },
       ),
     );

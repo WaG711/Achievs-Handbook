@@ -6,12 +6,13 @@ import 'details_state.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   final DetailsUseCase fetchGame;
+  final String userId;
 
-  DetailsBloc(this.fetchGame) : super(DetailsInitial()) {
+  DetailsBloc(this.fetchGame, this.userId) : super(DetailsInitial()) {
     on<LoadGame>((event, emit) async {
       emit(DetailsLoading());
       try {
-        final game = await fetchGame.execute(event.userId, event.gameId);
+        final game = await fetchGame.execute(userId, event.gameId);
         emit(DetailsLoaded(game));
       } catch (e) {
         emit(DetailsError("Не удалось загрузить данные об игре"));
@@ -21,7 +22,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<SearchAchievements>((event, emit) async {
       if (state is DetailsLoaded) {
         try {
-          final game = await fetchGame.execute(event.userId, event.gameId);
+          final game = await fetchGame.execute(userId, event.gameId);
 
           final filteredAchievements = game.achievements
               .where((achievement) => achievement.title

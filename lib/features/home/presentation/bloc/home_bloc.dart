@@ -6,10 +6,17 @@ import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeUseCase fetchGames;
+  String? _currentQuery;
 
   HomeBloc(this.fetchGames) : super(HomeInitial()) {
     on<LoadGames>((event, emit) async {
-      await _loadGames(event.userId, emit);
+      emit(HomeLoading());
+      try {
+        final games = await fetchGames.execute(event.userId);
+        emit(HomeLoaded(games));
+      } catch (e) {
+        emit(HomeError("Не удалось загрузить игры"));
+      }
     });
 
     on<RefreshGames>((event, emit) async {
@@ -17,19 +24,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
 
     on<SearchGames>((event, emit) async {
-      if (state is HomeLoaded) {
-        try {
-          final games = await fetchGames.execute(event.userId);
-          
-          final filteredGames = games
-              .where((game) =>
-                  game.title.toLowerCase().contains(event.query.toLowerCase()))
-              .toList();
-          emit(HomeLoaded(filteredGames));
-        } catch (e) {
-          emit(HomeError("Не удалось загрузить игры"));
-        }
-      }
+      _currentQuery = event.query;
+      await _loadGames(event.userId, emit);
     });
   }
 
@@ -37,7 +33,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoading());
     try {
       final games = await fetchGames.execute(userId);
-      emit(HomeLoaded(games));
+
+      final filteredGames = _currentQuery != null && _currentQuery!.isNotEmpty
+          ? games
+              .where((game) => game.title
+                  .toLowerCase()
+                  .contains(_currentQuery!.toLowerCase()))
+              .toList()
+          : games;
+
+      emit(HomeLoaded(filteredGames));
     } catch (e) {
       emit(HomeError("Не удалось загрузить игры"));
     }

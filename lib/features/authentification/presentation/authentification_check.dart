@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/widgets/custom_circular_progress_indicator.dart';
 import 'bloc/authentification_bloc.dart';
 import 'bloc/authentification_event.dart';
 import 'bloc/authentification_state.dart';
@@ -25,7 +26,7 @@ class AuthentificationCheck extends StatelessWidget {
           if (state is Error) {
             return Center(child: Text('Ошибка: ${state.message}'));
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CustomCircularProgressIndicator());
           }
         },
       ),

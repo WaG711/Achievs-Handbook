@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/widgets/custom_circular_progress_indicator.dart';
 import 'bloc/authentification_bloc.dart';
 import 'bloc/authentification_event.dart';
 import 'bloc/authentification_state.dart';
@@ -72,7 +73,7 @@ class _RegisterState extends State<Register> {
                 },
                 builder: (context, state) {
                   if (state is Loading) {
-                    return const CircularProgressIndicator();
+                    return const CustomCircularProgressIndicator();
                   }
                   return AuthorizationButton(
                     labelText: 'Создать учетную запись',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/appbar_search.dart';
+import '../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../domain/entities/game_details.dart';
 import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
@@ -45,7 +46,7 @@ class _DetailsState extends State<Details> {
             body: BlocBuilder<DetailsBloc, DetailsState>(
               builder: (context, state) {
                 if (state is DetailsLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CustomCircularProgressIndicator());
                 } else if (state is DetailsLoaded) {
                   final game = state.game;
                   return _buildSelectedContent(game);

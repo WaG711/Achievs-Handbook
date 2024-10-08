@@ -1,10 +1,10 @@
-import '../../domain/entities/game_home.dart';
-import '../api/home_api.dart';
+import '../../../home/domain/entities/game_home.dart';
+import '../api/favorite_games_api.dart';
 
-class HomeRepository {
-  final HomeApi _gameApi;
+class FavoriteGamesRepository {
+  final FavoriteGamesApi _gameApi;
 
-  HomeRepository(this._gameApi);
+  FavoriteGamesRepository(this._gameApi);
 
   final List<GameHome> _allGames = [
     GameHome(true, gameId: '1', title: 'Game 1Game 1Game 1 Game 1Game 1 Game 1Game 1 Game 1 Game 1Game 1Game 1Game 1 Game 1v Game 1', totalAchievements: 24),
@@ -18,13 +18,13 @@ class HomeRepository {
     GameHome(false, gameId: '9', title: 'Game 9', totalAchievements: 34),
   ];
 
-  Future<List<GameHome>> getGames(String userId) async {
-    // final gameModels = await _gameApi.fetchGames();
+  Future<List<GameHome>> getFavoriteGames(String userId) async {
+    // final gameModels = await _gameApi.fetchFavoriteGames();
     // return gameModels
     //     .map((model) => Game(model.isFavorite,
     //         gameId: model.gameId,
     //         title: model.title))
     //     .toList();
-    return _allGames;
+    return _allGames.where((g) => g.isFavorite == true).toList();
   }
 }

@@ -24,8 +24,7 @@ class GameCard extends StatelessWidget {
                 height: 300,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(5)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
                     color: Colors.pink[100]),
               ),
               const SizedBox(height: 2),

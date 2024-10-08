@@ -17,11 +17,15 @@ import 'features/details/data/repositories/details_repository.dart';
 import 'features/details/domain/usecases/details_usecase.dart';
 import 'features/details/presentation/bloc/details_bloc.dart';
 import 'features/details/presentation/details.dart';
+import 'features/favorite_games/data/api/favorite_games_api.dart';
+import 'features/favorite_games/data/repositories/favorite_games_repository.dart';
+import 'features/favorite_games/domain/usecases/favorite_games_usecase.dart';
+import 'features/favorite_games/presentation/bloc/favorite_games_bloc.dart';
+import 'features/favorite_games/presentation/favorite_games.dart';
 import 'features/home/data/api/home_api.dart';
 import 'features/home/data/repositories/home_repository.dart';
 import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
-import 'features/home/presentation/favorite_games.dart';
 import 'features/home/presentation/home.dart';
 
 void main() {
@@ -56,6 +60,15 @@ class MainApp extends StatelessWidget {
             final homeUseCase = HomeUseCase(repository);
             final userId = context.read<AuthentificationBloc>().userId;
             return HomeBloc(homeUseCase, userId);
+          },
+        ),
+        BlocProvider<FavoriteGamesBloc>(
+          create: (context) {
+            final favoriteGamesApi = FavoriteGamesApi(dio);
+            final repository = FavoriteGamesRepository(favoriteGamesApi);
+            final favoriteGamesUseCase = FavoriteGamesUseCase(repository);
+            final userId = context.read<AuthentificationBloc>().userId;
+            return FavoriteGamesBloc(favoriteGamesUseCase, userId);
           },
         ),
         BlocProvider<DetailsBloc>(create: (context) {

@@ -9,8 +9,4 @@ class HomeUseCase {
   Future<List<GameHome>> execute(String userId) async {
     return await repository.getGames(userId);
   }
-
-  Future<List<GameHome>> executeFavorite(String userId) async {
-    return await repository.getFavoriteGames(userId);
-  }
 }

@@ -18,28 +18,41 @@ class ListGames extends StatefulWidget {
 class _ListGamesState extends State<ListGames> {
   @override
   Widget build(BuildContext context) {
-    return MasonryGridView.count(
-      padding: const EdgeInsets.all(5),
-      crossAxisCount: 2,
-      mainAxisSpacing: 2.0,
-      crossAxisSpacing: 2.0,
-      itemCount: widget.games.length,
-      itemBuilder: (context, index) {
-        final game = widget.games[index];
-        return GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/details', arguments: game.gameId);
-          },
-          child: GameCard(
-            game: game,
-            onFavoriteToggle: () {
-              setState(() {
-                context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(game));
-              });
+    return widget.games.isEmpty
+        ? const Center(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                'Список пуст',
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
+            ),
+          )
+        : MasonryGridView.count(
+            padding: const EdgeInsets.all(5),
+            crossAxisCount: 2,
+            mainAxisSpacing: 2.0,
+            crossAxisSpacing: 2.0,
+            itemCount: widget.games.length,
+            itemBuilder: (context, index) {
+              final game = widget.games[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/details',
+                      arguments: game.gameId);
+                },
+                child: GameCard(
+                  game: game,
+                  onFavoriteToggle: () {
+                    setState(() {
+                      context
+                          .read<FavoriteGamesBloc>()
+                          .add(ChangeStatusFavorite(game));
+                    });
+                  },
+                ),
+              );
             },
-          ),
-        );
-      },
-    );
+          );
   }
 }

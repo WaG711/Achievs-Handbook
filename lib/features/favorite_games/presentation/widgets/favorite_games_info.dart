@@ -17,27 +17,19 @@ class FavoriteGamesInfo extends StatefulWidget {
 class _FavoriteGamesInfoState extends State<FavoriteGamesInfo> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 5.0),
+    return widget.games.isEmpty
+        ? const Center(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
               child: Text(
-                'Избранное',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                'Список пуст',
+                style: TextStyle(color: Colors.white, fontSize: 22),
               ),
-            )
-          ],
-        )),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
+            ),
+          )
+        : ListView.builder(
+            itemCount: widget.games.length,
+            itemBuilder: (context, index) {
               final game = widget.games[index];
               return GestureDetector(
                 onTap: () {
@@ -54,10 +46,6 @@ class _FavoriteGamesInfoState extends State<FavoriteGamesInfo> {
                 ),
               );
             },
-            childCount: widget.games.length,
-          ),
-        ),
-      ],
-    );
+          );
   }
 }

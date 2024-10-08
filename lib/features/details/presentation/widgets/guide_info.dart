@@ -35,15 +35,27 @@ class GuideInfo extends StatelessWidget {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final achievement = game.guide.achievements[index];
-              return AchievementContainer(achievement: achievement);
-            },
-            childCount: game.guide.achievements.length,
-          ),
-        )
+        game.achievements.isEmpty
+            ? const SliverToBoxAdapter(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Список пуст',
+                      style: TextStyle(color: Colors.white, fontSize: 22),
+                    ),
+                  ),
+                ),
+              )
+            : SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final achievement = game.guide.achievements[index];
+                    return AchievementContainer(achievement: achievement);
+                  },
+                  childCount: game.guide.achievements.length,
+                ),
+              )
       ],
     );
   }

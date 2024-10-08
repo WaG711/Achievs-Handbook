@@ -81,15 +81,27 @@ class _GameInfoState extends State<GameInfo> {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final achievement = widget.game.achievements[index];
-              return AchievementContainer(achievement: achievement);
-            },
-            childCount: widget.game.achievements.length,
-          ),
-        ),
+        widget.game.achievements.isEmpty
+            ? const SliverToBoxAdapter(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Список пуст',
+                      style: TextStyle(color: Colors.white, fontSize: 22),
+                    ),
+                  ),
+                ),
+              )
+            : SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final achievement = widget.game.achievements[index];
+                    return AchievementContainer(achievement: achievement);
+                  },
+                  childCount: widget.game.achievements.length,
+                ),
+              ),
       ],
     );
   }

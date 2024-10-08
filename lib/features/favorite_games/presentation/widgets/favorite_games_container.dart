@@ -9,18 +9,20 @@ class FavoriteGamesContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
+      elevation: 2,
+      color: const Color.fromARGB(255, 45, 45, 45),
+      shadowColor: const Color.fromARGB(255, 45, 45, 45),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
-        color: const Color.fromARGB(122, 45, 45, 45),
       ),
       child: Row(children: [
         Container(
           width: 115,
           height: 150,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: const BorderRadius.horizontal(left: Radius.circular(5)),
             color: Colors.pink[200],
           ),
         ),
@@ -39,8 +41,10 @@ class FavoriteGamesContainer extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
-                Text('Достижения: ${game.totalAchievements}',
-                    style: const TextStyle(color: Colors.white, fontSize: 16)),
+                Text(
+                  'Достижения: ${game.totalAchievements}',
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ],
             ),
           ),

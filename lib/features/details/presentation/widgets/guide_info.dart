@@ -35,7 +35,7 @@ class GuideInfo extends StatelessWidget {
             ),
           ),
         ),
-        game.achievements.isEmpty
+        game.guide.achievements.isEmpty
             ? const SliverToBoxAdapter(
                 child: Center(
                   child: Padding(

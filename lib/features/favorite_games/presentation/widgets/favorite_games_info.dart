@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guide_achievements/features/favorite_games/presentation/bloc/favorite_games_event.dart';
 
 import '../../../home/domain/entities/game_home.dart';
+import '../bloc/favorite_games_bloc.dart';
 import 'favorite_games_container.dart';
 
 class FavoriteGamesInfo extends StatefulWidget {
@@ -45,7 +48,7 @@ class _FavoriteGamesInfoState extends State<FavoriteGamesInfo> {
                   game: game,
                   onFavoriteToggle: () {
                     setState(() {
-                      game.isFavorite = !game.isFavorite;
+                      context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(game));
                     });
                   },
                 ),

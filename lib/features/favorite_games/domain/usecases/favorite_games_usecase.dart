@@ -9,4 +9,12 @@ class FavoriteGamesUseCase {
   Future<List<GameHome>> executeFavorite(String userId) async {
     return await repository.getFavoriteGames(userId);
   }
+
+  Future<void> addFavorites(String userId) async {
+    return await repository.addFavorites(userId);
+  }
+
+  Future<void> removeFavorites(String userId) async {
+    return await repository.removeFavorites(userId);
+  }
 }

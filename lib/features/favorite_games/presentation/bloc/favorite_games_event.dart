@@ -1,3 +1,5 @@
+import '../../../abstract_entities/game_base.dart';
+
 abstract class FavoriteGamesEvent {}
 
 class LoadFavoriteGames extends FavoriteGamesEvent {
@@ -16,4 +18,9 @@ class SearchFavoriteGames extends FavoriteGamesEvent {
 
 class ClearFavoriteQuery extends FavoriteGamesEvent {
   ClearFavoriteQuery();
+}
+
+class ChangeStatusFavorite extends FavoriteGamesEvent {
+  final GameBase gameBase;
+  ChangeStatusFavorite(this.gameBase);
 }

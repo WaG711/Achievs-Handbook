@@ -16,7 +16,7 @@ class FavoriteGamesBloc extends Bloc<FavoriteGamesEvent, FavoriteGamesState> {
         final games = await favoriteGamesUseCase.executeFavorite(userId);
         emit(FavoriteGamesLoaded(games));
       } catch (e) {
-        emit(FavoriteGamesError("Не удалось загрузить игры"));
+        emit(FavoriteGamesError('Не удалось загрузить игры'));
       }
     });
 
@@ -31,6 +31,22 @@ class FavoriteGamesBloc extends Bloc<FavoriteGamesEvent, FavoriteGamesState> {
 
     on<ClearFavoriteQuery>((event, emit) async {
       _favoriteQuery = null;
+    });
+
+    on<ChangeStatusFavorite>((event, emit) async {
+      try {
+        if (event.gameBase.isFavorite) {
+          await favoriteGamesUseCase.removeFavorites(userId);
+        } else {
+          await favoriteGamesUseCase.addFavorites(userId);
+        }
+        event.gameBase.isFavorite = !event.gameBase.isFavorite;
+        
+        final games = await favoriteGamesUseCase.executeFavorite(userId);
+        emit(FavoriteGamesLoaded(games));
+      } catch (e) {
+        emit(ChangeStatusFavoriteFailed('Не удалось изменить статус избранного'));
+      }
     });
   }
 
@@ -49,7 +65,7 @@ class FavoriteGamesBloc extends Bloc<FavoriteGamesEvent, FavoriteGamesState> {
 
       emit(FavoriteGamesLoaded(filteredGames));
     } catch (e) {
-      emit(FavoriteGamesError("Не удалось загрузить игры"));
+      emit(FavoriteGamesError('Не удалось загрузить игры'));
     }
   }
 }

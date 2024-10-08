@@ -15,3 +15,8 @@ class FavoriteGamesError extends FavoriteGamesState {
   final String message;
   FavoriteGamesError(this.message);
 }
+
+class ChangeStatusFavoriteFailed extends FavoriteGamesState {
+  final String message;
+  ChangeStatusFavoriteFailed(this.message);
+}

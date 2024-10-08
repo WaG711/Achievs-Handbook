@@ -15,7 +15,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         final game = await fetchGame.execute(userId, event.gameId);
         emit(DetailsLoaded(game));
       } catch (e) {
-        emit(DetailsError("Не удалось загрузить данные об игре"));
+        emit(DetailsError('Не удалось загрузить данные об игре'));
       }
     });
 
@@ -33,7 +33,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           final filteredGame = game.copyWith(achievements: filteredAchievements);
           emit(DetailsLoaded(filteredGame));
         } catch (e) {
-          emit(DetailsError("Не удалось загрузить данные об игре"));
+          emit(DetailsError('Не удалось загрузить данные об игре'));
         }
       }
     });

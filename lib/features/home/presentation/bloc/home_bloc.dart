@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final games = await homeUseCase.execute(userId);
         emit(HomeLoaded(games));
       } catch (e) {
-        emit(HomeError("Не удалось загрузить игры"));
+        emit(HomeError('Не удалось загрузить игры'));
       }
     });
 
@@ -44,7 +44,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       emit(HomeLoaded(filteredGames));
     } catch (e) {
-      emit(HomeError("Не удалось загрузить игры"));
+      emit(HomeError('Не удалось загрузить игры'));
     }
   }
 }

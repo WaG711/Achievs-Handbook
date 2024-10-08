@@ -1,12 +1,13 @@
-class GameHome {
-  final String gameId;
+import '../../../abstract_entities/game_base.dart';
+
+class GameHome extends GameBase {
   final String title;
   //final String posterUrl;
-  bool isFavorite;
   final int totalAchievements;
 
-  GameHome(this.isFavorite,
-      {required this.gameId,
+  GameHome(
+      {required super.gameId,
       required this.title,
-      required this.totalAchievements});
+      required this.totalAchievements,
+      required super.isFavorite});
 }

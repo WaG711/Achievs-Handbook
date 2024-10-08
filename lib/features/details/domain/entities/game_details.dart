@@ -1,28 +1,29 @@
+import '../../../abstract_entities/game_base.dart';
 import 'achievement.dart';
 import 'guide.dart';
 
-class GameDetails {
-  final String gameId;
+class GameDetails extends GameBase {
   final String title;
   //final String posterUrl;
   final Guide guide;
   final List<Achievement> achievements;
-  bool isFavorite;
 
-  GameDetails(this.isFavorite,
-      {required this.gameId,
+  GameDetails(
+      {required super.gameId,
       required this.title,
       //required this.posterUrl,
       required this.guide,
-      required this.achievements});
+      required this.achievements,
+      required super.isFavorite});
 
   GameDetails copyWith({
     List<Achievement>? achievements,
   }) {
-    return GameDetails(isFavorite,
+    return GameDetails(
         gameId: gameId,
         title: title,
         guide: guide,
-        achievements: achievements ?? this.achievements);
+        achievements: achievements ?? this.achievements,
+        isFavorite: isFavorite);
   }
 }

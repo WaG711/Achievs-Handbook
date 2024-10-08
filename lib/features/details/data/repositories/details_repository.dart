@@ -12,7 +12,7 @@ class DetailsRepository {
 
   DetailsRepository(this._gameApi);
 
-  final GameDetails _game = GameDetails(false,
+  final GameDetails _game = GameDetails(
       gameId: '1',
       title: 'dghdgdgfdgdg',
       guide: const Guide(
@@ -20,9 +20,13 @@ class DetailsRepository {
           description: 'sdfgsdgsd sdg gs gsd gsd hsd hds hfsdf ',
           achievements: [
             Achievement(
-                achievementId: '1', title: 'title1', description: 'description'),
+                achievementId: '1',
+                title: 'title1',
+                description: 'description'),
             Achievement(
-                achievementId: '2', title: 'title2', description: 'description'),
+                achievementId: '2',
+                title: 'title2',
+                description: 'description'),
           ]),
       achievements: [
         const Achievement(
@@ -31,7 +35,8 @@ class DetailsRepository {
             achievementId: '2', title: 'title2', description: 'description'),
         const Achievement(
             achievementId: '3', title: 'title3', description: 'description'),
-      ]);
+      ],
+      isFavorite: false);
 
   Future<GameDetails> getGame(String userId, String gameId) async {
     // final gameModel = await _gameApi.fetchGame(gameId);
@@ -41,7 +46,6 @@ class DetailsRepository {
 
   GameDetails _mapGameModelApiToGame(GameDetailsModelApi gameModelApi) {
     return GameDetails(
-      gameModelApi.isFavorite,
       gameId: gameModelApi.gameId,
       title: gameModelApi.title,
       //posterUrl: gameModelApi.posterUrl,
@@ -49,6 +53,7 @@ class DetailsRepository {
       achievements: gameModelApi.achievementsApi
           .map((a) => _mapAchievementModelApiToAchievement(a))
           .toList(),
+      isFavorite: gameModelApi.isFavorite,
     );
   }
 

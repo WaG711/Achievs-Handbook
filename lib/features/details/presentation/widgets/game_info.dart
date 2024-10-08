@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../favorite_games/presentation/bloc/favorite_games_bloc.dart';
+import '../../../favorite_games/presentation/bloc/favorite_games_event.dart';
 import '../../domain/entities/game_details.dart';
 import 'achievement_container.dart';
 
@@ -68,7 +71,7 @@ class _GameInfoState extends State<GameInfo> {
                       ),
                       onPressed: () {
                         setState(() {
-                          widget.game.isFavorite = !widget.game.isFavorite;
+                          context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(widget.game));
                         });
                       },
                     ),

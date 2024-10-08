@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../../favorite_games/presentation/bloc/favorite_games_bloc.dart';
+import '../../../favorite_games/presentation/bloc/favorite_games_event.dart';
 import '../../domain/entities/game_home.dart';
 import 'game_card.dart';
 
@@ -31,7 +34,7 @@ class _ListGamesState extends State<ListGames> {
             game: game,
             onFavoriteToggle: () {
               setState(() {
-                game.isFavorite = !game.isFavorite;
+                context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(game));
               });
             },
           ),

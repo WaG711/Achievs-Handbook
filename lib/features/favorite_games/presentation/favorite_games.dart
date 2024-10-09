@@ -6,7 +6,7 @@ import '../../../core/widgets/custom_circular_progress_indicator.dart';
 import 'bloc/favorite_games_bloc.dart';
 import 'bloc/favorite_games_event.dart';
 import 'bloc/favorite_games_state.dart';
-import 'widgets/favorite_games_info.dart';
+import 'widgets/favorite_list.dart';
 
 class FavoriteGames extends StatelessWidget {
   const FavoriteGames({super.key});
@@ -40,7 +40,7 @@ class FavoriteGames extends StatelessWidget {
                   context.read<FavoriteGamesBloc>().add(RefreshFavoriteGames());
                 },
                 color: Colors.green,
-                child: FavoriteGamesInfo(games: games),
+                child: FavoriteList(games: games),
               );
             } else if (state is FavoriteGamesError) {
               return Center(child: Text(state.message));

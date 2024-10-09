@@ -4,17 +4,17 @@ import 'package:guide_achievements/features/favorite_games/presentation/bloc/fav
 
 import '../../../home/domain/entities/game_home.dart';
 import '../bloc/favorite_games_bloc.dart';
-import 'favorite_games_container.dart';
+import 'favorite_card.dart';
 
-class FavoriteGamesInfo extends StatefulWidget {
+class FavoriteList extends StatefulWidget {
   final List<GameHome> games;
-  const FavoriteGamesInfo({super.key, required this.games});
+  const FavoriteList({super.key, required this.games});
 
   @override
-  State<FavoriteGamesInfo> createState() => _FavoriteGamesInfoState();
+  State<FavoriteList> createState() => _FavoriteListState();
 }
 
-class _FavoriteGamesInfoState extends State<FavoriteGamesInfo> {
+class _FavoriteListState extends State<FavoriteList> {
   @override
   Widget build(BuildContext context) {
     return widget.games.isEmpty
@@ -36,11 +36,13 @@ class _FavoriteGamesInfoState extends State<FavoriteGamesInfo> {
                   Navigator.pushNamed(context, '/details',
                       arguments: game.gameId);
                 },
-                child: FavoriteGamesContainer(
+                child: FavoriteCard(
                   game: game,
                   onFavoriteToggle: () {
                     setState(() {
-                      context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(game));
+                      context
+                          .read<FavoriteGamesBloc>()
+                          .add(ChangeStatusFavorite(game));
                     });
                   },
                 ),

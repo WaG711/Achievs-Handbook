@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../home/domain/entities/game_home.dart';
 
-class FavoriteGamesContainer extends StatelessWidget {
+class FavoriteCard extends StatelessWidget {
   final GameHome game;
   final VoidCallback onFavoriteToggle;
-  const FavoriteGamesContainer({super.key, required this.game, required this.onFavoriteToggle});
+  const FavoriteCard({super.key, required this.game, required this.onFavoriteToggle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,8 @@ class FavoriteGamesContainer extends StatelessWidget {
           width: 115,
           height: 150,
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.horizontal(left: Radius.circular(5)),
+            borderRadius:
+                const BorderRadius.horizontal(left: Radius.circular(5)),
             color: Colors.pink[200],
           ),
         ),
@@ -37,7 +38,7 @@ class FavoriteGamesContainer extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
-                  maxLines: 5,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),

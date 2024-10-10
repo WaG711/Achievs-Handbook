@@ -30,7 +30,7 @@ class FavoriteCard extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: 5.0, top: 5.0),
+            padding: const EdgeInsets.only(left: 5.0, top: 5.0, right: 5.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -17,20 +17,22 @@ class FavoriteCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Row(children: [
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
         Container(
           width: 115,
           height: 150,
           decoration: BoxDecoration(
-            borderRadius:
-                const BorderRadius.horizontal(left: Radius.circular(5)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             color: Colors.pink[200],
           ),
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: 5.0, bottom: 5.0),
+            padding: const EdgeInsets.only(left: 5.0, top: 5.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   game.title,
@@ -38,13 +40,13 @@ class FavoriteCard extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
-                  maxLines: 3,
+                  maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
                 Text(
                   'Достижения: ${game.totalAchievements}',
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(color: Colors.white, fontSize: 17),
                 ),
               ],
             ),
@@ -53,7 +55,7 @@ class FavoriteCard extends StatelessWidget {
         Container(
           height: 150,
           decoration: const BoxDecoration(
-            borderRadius: BorderRadius.horizontal(right: Radius.circular(5.0)),
+            borderRadius: BorderRadius.horizontal(right: Radius.circular(5)),
             color: Colors.green,
           ),
           child: IconButton(

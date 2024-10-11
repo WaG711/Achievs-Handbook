@@ -41,9 +41,6 @@ class FavoriteGamesBloc extends Bloc<FavoriteGamesEvent, FavoriteGamesState> {
           await favoriteGamesUseCase.addFavorites(userId, event.gameBase.gameId);
         }
         event.gameBase.isFavorite = !event.gameBase.isFavorite;
-        
-        final games = await favoriteGamesUseCase.executeFavorite(userId);
-        emit(FavoriteGamesLoaded(games));
       } catch (e) {
         emit(ChangeStatusFavoriteFailed('Не удалось изменить статус избранного'));
       }

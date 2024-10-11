@@ -8,7 +8,7 @@ class DetailsApi {
   DetailsApi(this._dio);
 
   Future<GameDetailsModelApi> fetchGame(String userId, String gameId) async {
-    final response = await _dio.get('');
+    final response = await _dio.get('', data: {'userId': userId, 'gameId': gameId});
     if (response.statusCode == 200) {
       dynamic data = response.data['game'];
       return data.map((json) => GameDetailsModelApi.fromJson(json));

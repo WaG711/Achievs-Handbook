@@ -1,4 +1,4 @@
-import '../../../abstract_entities/game_base.dart';
+import '../../../../core/abstract_entities/game_base.dart';
 import 'achievement.dart';
 import 'guide.dart';
 

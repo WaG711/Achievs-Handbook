@@ -8,9 +8,9 @@ class FavoriteGamesApi {
   FavoriteGamesApi(this._dio);
 
   Future<List<GameHomeModelApi>> fetchFavoriteGames(String userId) async {
-    final response = await _dio.get('');
+    final response = await _dio.get('', data: userId);
     if (response.statusCode == 200) {
-      List<dynamic> data = response.data['games'];
+      List<dynamic> data = response.data['favoriteGames'];
       return data.map((json) => GameHomeModelApi.fromJson(json)).toList();
     } else {
       throw Exception('Не удалось загрузить игры');
@@ -18,22 +18,24 @@ class FavoriteGamesApi {
   }
 
   Future<void> addFavorites(String userId, String gameId) async {
-    // final response = await _dio.get('');
-    // if (response.statusCode == 200) {
-    //   List<dynamic> data = response.data['games'];
-    //   return data.map((json) => GameHomeModelApi.fromJson(json)).toList();
-    // } else {
-    //   throw Exception('Не удалось загрузить игры');
-    // }
+    final response = await _dio.post('', data: {
+      'userId': userId,
+      'gameId': gameId,
+    });
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('Не удалось загрузить игры');
+    }
   }
 
   Future<void> removeFavorites(String userId, String gameId) async {
-    // final response = await _dio.get('');
-    // if (response.statusCode == 200) {
-    //   List<dynamic> data = response.data['games'];
-    //   return data.map((json) => GameHomeModelApi.fromJson(json)).toList();
-    // } else {
-    //   throw Exception('Не удалось загрузить игры');
-    // }
+    final response = await _dio.post('', data: {
+      'userId': userId,
+      'gameId': gameId,
+    });
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('Не удалось загрузить игры');
+    }
   }
 }

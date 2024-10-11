@@ -8,7 +8,10 @@ class HomeApi {
   HomeApi(this._dio);
 
   Future<List<GameHomeModelApi>> fetchGames(String userId) async {
-    final response = await _dio.get('');
+    final response = await _dio.get(
+      '',
+      data: userId,
+    );
     if (response.statusCode == 200) {
       List<dynamic> data = response.data['games'];
       return data.map((json) => GameHomeModelApi.fromJson(json)).toList();

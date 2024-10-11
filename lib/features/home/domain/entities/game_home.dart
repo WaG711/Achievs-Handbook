@@ -1,4 +1,4 @@
-import '../../../abstract_entities/game_base.dart';
+import '../../../../core/abstract_entities/game_base.dart';
 
 class GameHome extends GameBase {
   final String title;

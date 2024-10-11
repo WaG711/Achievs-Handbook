@@ -10,11 +10,11 @@ class FavoriteGamesUseCase {
     return await repository.getFavoriteGames(userId);
   }
 
-  Future<void> addFavorites(String userId) async {
-    return await repository.addFavorites(userId);
+  Future<void> addFavorites(String userId, String gameId) async {
+    return await repository.addFavorites(userId, gameId);
   }
 
-  Future<void> removeFavorites(String userId) async {
-    return await repository.removeFavorites(userId);
+  Future<void> removeFavorites(String userId, String gameId) async {
+    return await repository.removeFavorites(userId, gameId);
   }
 }

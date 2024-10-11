@@ -36,9 +36,9 @@ class FavoriteGamesBloc extends Bloc<FavoriteGamesEvent, FavoriteGamesState> {
     on<ChangeStatusFavorite>((event, emit) async {
       try {
         if (event.gameBase.isFavorite) {
-          await favoriteGamesUseCase.removeFavorites(userId);
+          await favoriteGamesUseCase.removeFavorites(userId, event.gameBase.gameId);
         } else {
-          await favoriteGamesUseCase.addFavorites(userId);
+          await favoriteGamesUseCase.addFavorites(userId, event.gameBase.gameId);
         }
         event.gameBase.isFavorite = !event.gameBase.isFavorite;
         

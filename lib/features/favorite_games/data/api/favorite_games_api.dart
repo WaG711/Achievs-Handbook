@@ -17,7 +17,7 @@ class FavoriteGamesApi {
     }
   }
 
-  Future<void> addFavorites(String userId) async {
+  Future<void> addFavorites(String userId, String gameId) async {
     // final response = await _dio.get('');
     // if (response.statusCode == 200) {
     //   List<dynamic> data = response.data['games'];
@@ -27,7 +27,7 @@ class FavoriteGamesApi {
     // }
   }
 
-  Future<void> removeFavorites(String userId) async {
+  Future<void> removeFavorites(String userId, String gameId) async {
     // final response = await _dio.get('');
     // if (response.statusCode == 200) {
     //   List<dynamic> data = response.data['games'];

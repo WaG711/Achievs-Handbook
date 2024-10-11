@@ -28,11 +28,11 @@ class FavoriteGamesRepository {
     return _allGames.where((g) => g.isFavorite == true).toList();
   }
 
-  Future<void> removeFavorites(String userId) async {
+  Future<void> removeFavorites(String userId, String gameId) async {
     // final gameModels = await _gameApi.removeFavorites();
   }
 
-  Future<void> addFavorites(String userId) async {
+  Future<void> addFavorites(String userId, String gameId) async {
     // final gameModels = await _gameApi.addFavorites();
   }
 }

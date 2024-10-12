@@ -60,11 +60,12 @@ class _AppbarSearchState extends State<AppbarSearch> {
         IconButton(
           iconSize: 30,
           icon: const Icon(Icons.menu_rounded),
-          onPressed: () async {
-            await showModalBottomSheet(
+          onPressed: () {
+            final currentRoute = ModalRoute.of(context)?.settings.name;
+            showModalBottomSheet(
               context: context,
               builder: (context) {
-                return const BottomSheetMenu();
+                return BottomSheetMenu(currentRoute: currentRoute!);
               },
             );
           },

@@ -5,7 +5,8 @@ import '../../features/authentification/presentation/bloc/authentification_bloc.
 import '../../features/authentification/presentation/bloc/authentification_event.dart';
 
 class BottomSheetMenu extends StatelessWidget {
-  const BottomSheetMenu({super.key});
+  final String currentRoute;
+  const BottomSheetMenu({super.key, required this.currentRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,9 @@ class BottomSheetMenu extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/favoriteGames');
+              if (currentRoute != '/favoriteGames') {
+                Navigator.pushNamed(context, '/favoriteGames');
+              }
             },
           ),
           ListTile(

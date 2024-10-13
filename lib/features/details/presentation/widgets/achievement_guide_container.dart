@@ -62,8 +62,7 @@ class AchievementGuideContainer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: SelectableText(achievement.description,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15)),
+                        style: const TextStyle(color: Colors.white, fontSize: 15)),
                   ),
                   if (achievement.screenshotsUrls.isNotEmpty)
                     Padding(
@@ -71,8 +70,7 @@ class AchievementGuideContainer extends StatelessWidget {
                       child: GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -96,7 +94,7 @@ class AchievementGuideContainer extends StatelessWidget {
                                         panEnabled: true,
                                         minScale: 0.5,
                                         maxScale: 4.0,
-                                        child: Image.network(url),
+                                        child: CachedNetworkImage(imageUrl: url)
                                       ),
                                     ),
                                   );
@@ -110,8 +108,7 @@ class AchievementGuideContainer extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => Container(
                                   color: Colors.grey[300],
-                                  child:
-                                      const CustomCircularProgressIndicator(),
+                                  child: const CustomCircularProgressIndicator(),
                                 ),
                                 errorWidget: (context, url, error) => Container(
                                   color: Colors.grey[300],

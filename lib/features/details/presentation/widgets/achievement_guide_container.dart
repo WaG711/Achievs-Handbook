@@ -66,7 +66,7 @@ class AchievementGuideContainer extends StatelessWidget {
                   ),
                   if (achievement.screenshotsUrls.isNotEmpty)
                     Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
+                      padding: const EdgeInsets.only(left: 15.0, top: 10.0),
                       child: GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

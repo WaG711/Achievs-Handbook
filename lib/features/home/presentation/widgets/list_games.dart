@@ -45,9 +45,7 @@ class _ListGamesState extends State<ListGames> {
                   game: game,
                   onFavoriteToggle: () {
                     setState(() {
-                      context
-                          .read<FavoriteGamesBloc>()
-                          .add(ChangeStatusFavorite(game));
+                      context.read<FavoriteGamesBloc>().add(ChangeStatusFavorite(game));
                     });
                   },
                 ),

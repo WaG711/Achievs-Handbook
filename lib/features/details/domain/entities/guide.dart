@@ -1,9 +1,9 @@
-import 'achievement.dart';
+import 'achievement_guide.dart';
 
 class Guide {
   final String guideId;
   final String description;
-  final List<Achievement> achievements;
+  final List<AchievementGuide> achievements;
 
   const Guide(
       {required this.guideId,

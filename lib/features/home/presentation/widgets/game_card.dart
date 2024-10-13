@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../../domain/entities/game_home.dart';
 
 class GameCard extends StatelessWidget {
@@ -20,16 +22,30 @@ class GameCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
-                    color: Colors.pink[100]),
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+                child: CachedNetworkImage(
+                  imageUrl: game.posterUrl,
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.grey[300],
+                    child: const CustomCircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.grey[300],
+                    child: const Icon(Icons.image_not_supported,
+                        color: Colors.grey),
+                  ),
+                ),
               ),
-              const SizedBox(height: 2),
               Padding(
-                padding: const EdgeInsets.only(left: 5.0),
+                padding: const EdgeInsets.only(left: 5.0, top: 2.0),
                 child: Text(
                   'Достижения: ${game.totalAchievements}',
                   style: const TextStyle(color: Colors.white, fontSize: 15),

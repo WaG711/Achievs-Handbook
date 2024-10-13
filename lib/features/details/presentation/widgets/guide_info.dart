@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/game_details.dart';
-import 'achievement_container.dart';
+import 'achievement_guide_container.dart';
 
 class GuideInfo extends StatelessWidget {
   final GameDetails game;
@@ -51,7 +51,7 @@ class GuideInfo extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     final achievement = game.guide.achievements[index];
-                    return AchievementContainer(achievement: achievement);
+                    return AchievementGuideContainer(achievement: achievement);
                   },
                   childCount: game.guide.achievements.length,
                 ),

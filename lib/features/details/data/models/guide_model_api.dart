@@ -1,21 +1,21 @@
-import 'achievement_model_api.dart';
+import 'achievement_guide_model_api.dart';
 
 class GuideModelApi {
   final String guideId;
   final String description;
-  final List<AchievementModelApi> achievementsApi;
+  final List<AchievementGuideModelApi> achievementsGuideApi;
 
   const GuideModelApi(
       {required this.guideId,
       required this.description,
-      required this.achievementsApi});
+      required this.achievementsGuideApi});
 
   factory GuideModelApi.fromJson(Map<String, dynamic> json) {
     return GuideModelApi(
         guideId: json['guideId'],
         description: json['description'],
-        achievementsApi: (json['achievements'] as List)
-            .map((i) => AchievementModelApi.fromJson(i))
+        achievementsGuideApi: (json['achievements'] as List)
+            .map((i) => AchievementGuideModelApi.fromJson(i))
             .toList());
   }
 }

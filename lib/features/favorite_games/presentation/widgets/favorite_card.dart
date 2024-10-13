@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../../../home/domain/entities/game_home.dart';
 
 class FavoriteCard extends StatelessWidget {
@@ -17,15 +19,26 @@ class FavoriteCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        Container(
-          width: 115,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(5)),
-            color: Colors.pink[200],
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: CachedNetworkImage(
+            imageUrl: game.posterUrl,
+            width: 115,
+            height: 150,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => Container(
+              width: 100,
+              height: 100,
+              color: Colors.grey[300],
+              child: const CustomCircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => Container(
+              width: 100,
+              height: 100,
+              color: Colors.grey[300],
+              child: const Icon(Icons.image_not_supported, color: Colors.grey),
+            ),
           ),
         ),
         Expanded(

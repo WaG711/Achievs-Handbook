@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../../domain/entities/achievement.dart';
 
 class AchievementContainer extends StatelessWidget {
@@ -18,37 +20,42 @@ class AchievementContainer extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.grey[300],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: CachedNetworkImage(
+              imageUrl: achievement.posterUrl,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(
+                width: 100,
+                height: 100,
+                color: Colors.grey[300],
+                child: const CustomCircularProgressIndicator(),
+              ),
+              errorWidget: (context, url, error) => Container(
+                width: 100,
+                height: 100,
+                color: Colors.grey[300],
+                child:
+                    const Icon(Icons.image_not_supported, color: Colors.grey),
+              ),
             ),
           ),
           Expanded(
-            child: Theme(
-              data: Theme.of(context).copyWith(
-                dividerColor: Colors.transparent,
-              ),
-              child: ExpansionTile(
-                collapsedIconColor: Colors.green,
-                iconColor: Colors.green,
-                childrenPadding: EdgeInsets.zero,
-                title: Text(
-                  achievement.title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: SelectableText(achievement.description,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 13)),
+                  SelectableText(
+                    achievement.title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
+                  SelectableText(achievement.description,
+                      style: const TextStyle(color: Colors.white, fontSize: 18)),
                 ],
               ),
             ),

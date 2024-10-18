@@ -19,6 +19,7 @@ class AchievementContainer extends StatelessWidget {
         color: const Color.fromARGB(255, 35, 35, 35),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
@@ -46,6 +47,7 @@ class AchievementContainer extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectableText(
                     achievement.title,

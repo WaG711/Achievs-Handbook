@@ -19,6 +19,7 @@ class AchievementGuideContainer extends StatelessWidget {
         color: const Color.fromARGB(255, 35, 35, 35),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
@@ -37,8 +38,7 @@ class AchievementGuideContainer extends StatelessWidget {
                 width: 100,
                 height: 100,
                 color: Colors.grey[300],
-                child:
-                    const Icon(Icons.image_not_supported, color: Colors.grey),
+                child: const Icon(Icons.image_not_supported, color: Colors.grey),
               ),
             ),
           ),

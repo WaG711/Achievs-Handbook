@@ -3,17 +3,18 @@ import 'package:dio/dio.dart';
 import '../models/game_details_model_api.dart';
 
 class DetailsApi {
-  final Dio _dio;
+  final Dio dio;
 
-  DetailsApi(this._dio);
+  DetailsApi(this.dio);
 
   Future<GameDetailsModelApi> fetchGame(String userId, String gameId) async {
-    final response = await _dio.get('', data: {'userId': userId, 'gameId': gameId});
+    final response = await dio.get('',
+        data: gameId, options: Options(headers: {'userId': userId}));
     if (response.statusCode == 200) {
       dynamic data = response.data['game'];
       return data.map((json) => GameDetailsModelApi.fromJson(json));
     } else {
-      throw Exception('Не удалось загрузить игры');
+      throw Exception('Не удалось загрузить игру');
     }
   }
 }

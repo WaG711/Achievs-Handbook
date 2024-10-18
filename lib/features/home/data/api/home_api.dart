@@ -3,14 +3,18 @@ import 'package:dio/dio.dart';
 import '../models/game_home_model_api.dart';
 
 class HomeApi {
-  final Dio _dio;
+  final Dio dio;
 
-  HomeApi(this._dio);
+  HomeApi(this.dio);
 
   Future<List<GameHomeModelApi>> fetchGames(String userId) async {
-    final response = await _dio.get(
+    final response = await dio.get(
       '',
-      data: userId,
+      options: Options(
+        headers: {
+          'userId': userId
+        }
+      )
     );
     if (response.statusCode == 200) {
       List<dynamic> data = response.data['games'];
